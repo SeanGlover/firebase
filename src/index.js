@@ -61,31 +61,31 @@ const loginEmailPassword = async () => {
     try {
         const signin = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
         alert(`login succeeded for: ${auth.currentUser.displayName}`);
-        // try {
-        //   const reportsCollection = collection(db, 'reports');
-        //   const snapshot = await getDocs(reportsCollection);
-        //   const docData = {
-        //       stringExample: "Hello world!",
-        //       booleanExample: true,
-        //       numberExample: 3.14159265,
-        //       dateExample: new Date("December 10, 1815"),
-        //       arrayExample: [5, true, "hello"],
-        //       nullExample: null,
-        //       objectExample: {
-        //           a: 5,
-        //           b: {
-        //               nested: "foo"
-        //           }
-        //       }
-        //     };
-          // alert(JSON.stringify(docData));
-        //   alert(reportsCollection.path);
-        //   const docTest = await addDoc(reportsCollection, docData, getAuth().currentUser.uid);
-        // }
-        // catch (e) {
-        //   alert("Error adding document: " + e);
-        //   console.error("Error adding document: ", e);
-        // }
+        try {
+          const reportsCollection = collection(db, 'reports');
+          const snapshot = await getDocs(reportsCollection);
+          const docData = {
+              stringExample: "Hello world!",
+              booleanExample: true,
+              numberExample: 3.14159265,
+              dateExample: new Date("December 10, 1815"),
+              arrayExample: [5, true, "hello"],
+              nullExample: null,
+              objectExample: {
+                  a: 5,
+                  b: {
+                      nested: "foo"
+                  }
+              }
+            };
+          alert(JSON.stringify(docData));
+          alert(reportsCollection.path);
+          const docTest = await addDoc(reportsCollection, docData, getAuth().currentUser.uid);
+        }
+        catch (e) {
+          alert("Error adding document: " + e);
+          console.error("Error adding document: ", e);
+        }
     }
     catch (error) {
         showLoginError(error);
