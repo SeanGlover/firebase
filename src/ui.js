@@ -5,6 +5,7 @@ export const btnLogin = document.querySelector('#btnLogin')
 export const divLoginError = document.querySelector('#divLoginError')
 export const lblLoginErrorMsg = document.querySelector('#lblLoginErrorMsg')
 export const btnSignup = document.querySelector('#btnSignup')
+export const lnkForgotPwd = document.querySelector('#forgotPassword')
 
 export const btnLogout = document.querySelector('#btnLogout')
 export const divAuthState = document.querySelector('#divAuthState')
@@ -30,8 +31,8 @@ export function showLoginError(error) {
         lblLoginErrorMsg.innerHTML = 'User id not found - create one?';
         btnSignup.className = 'btn btn-outline-danger';
     }
-    else if(error.code.toString() == 'auth/user-not-found') {
-
+    else {
+        alert(`error: ${error}`);
     }
 }
 export const hideLoginError = () => {
