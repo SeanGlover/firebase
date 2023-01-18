@@ -1,40 +1,41 @@
 import { AuthErrorCodes } from "firebase/auth";
 export const txtEmail = document.querySelector('#txtEmail')
 export const txtPassword = document.querySelector('#txtPassword')
-export const btnLogin = document.querySelector('#btnLogin')
-export const divLoginError = document.querySelector('#divLoginError')
-export const lblLoginErrorMsg = document.querySelector('#lblLoginErrorMsg')
+export const btnSignin = document.querySelector('#btnSignin')
+export const lblSigninErrorMsg = document.querySelector('#lblSigninErrorMsg')
 export const btnSignup = document.querySelector('#btnSignup')
 export const lnkForgotPwd = document.querySelector('#forgotPassword')
 
-export const btnLogout = document.querySelector('#btnLogout')
-export const divAuthState = document.querySelector('#divAuthState')
-export const lblAuthState = document.querySelector('#lblAuthState')
+export const btnSignout = document.querySelector('#btnSignout')
 
-export const showApp = () => {
-    login.style.display = 'none'
-    app.style.display = 'block'
+export const sectionSignin = document.querySelector('#sectionSignin')
+export const sectionForm = document.querySelector('#sectionForm')
+
+export const showFormSection = (userCreds) => {
+    sectionSignin.style.display = 'none'
+    sectionForm.style.display = 'block'
+    alert(`Sign in succeeded for: ${userCreds.user.email + ' - ' + userCreds.user.displayName}`);
 }
-export const showLoginForm = () => {
-    login.style.display = 'block'
-    app.style.display = 'none'
+export const showSigninSection = () => {
+    sectionSignin.style.display = 'block'
+    sectionForm.style.display = 'none'
 }
-export function showLoginError(error) {
-    divLoginError.style.display = 'block';
+export function showSigninError(error) {
+    lblSigninErrorMsg.style.display = 'block';
     if (error.code == AuthErrorCodes.INVALID_PASSWORD) {
-        lblLoginErrorMsg.innerHTML = 'Wrong userid or password. Try again.';
+        lblSigninErrorMsg.innerHTML = 'Wrong userid or password. Try again.';
     }
     else if(error.code == AuthErrorCodes.INVALID_EMAIL){
-        lblLoginErrorMsg.innerHTML = 'Email format is not correct. Try again.';
+        lblSigninErrorMsg.innerHTML = 'Email format is not correct. Try again.';
     }
     else if(error.code == AuthErrorCodes.USER_DELETED){
-        lblLoginErrorMsg.innerHTML = 'User id not found - create one?';
+        lblSigninErrorMsg.innerHTML = 'User id not found - create one?';
         btnSignup.className = 'btn btn-outline-danger';
     }
     else {
         alert(`error: ${error}`);
     }
 }
-export const hideLoginError = () => {
-    divLoginError.style.display = 'none'
+export const hideSigninError = () => {
+    divSigninError.style.display = 'none'
 }

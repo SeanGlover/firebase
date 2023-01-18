@@ -1,17 +1,19 @@
-import './styles.css';
 import {
     txtEmail,
     txtPassword,
-    btnLogin,
+    btnSignin,
     btnSignup,
-    showLoginError,
+    showSigninError,
     lnkForgotPwd,
-    hideLoginError,
-    showLoginState,
-    showLoginForm,
+    showFormSection,
+    showSigninSection,
+    hideSigninError,
+    showSigninState,
+    showSigninForm,
     showApp,
-    btnLogout
+    btnSignout
 } from './ui';
+// import './styles.css';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js
@@ -43,8 +45,9 @@ import {
     createUserWithEmailAndPassword
 } from 'firebase/auth'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js
 
-//#region auth / login
+//#region auth / Signin
 const auth = getAuth(app);
+connectAuthEmulator(auth, 'http://localhost:9099');
 onAuthStateChanged(auth, user => {
     if(user!=null) {
         console.log('logged in!');
@@ -53,55 +56,54 @@ onAuthStateChanged(auth, user => {
         console.log(': ( ...log in failed');
     }
 })
-connectAuthEmulator(auth, 'http://localhost:9099');
 
-const loginEmailPassword = async () => {
-    const loginEmail = txtEmail.value;
-    const loginPassword = txtPassword.value;
-    try {
-        const signin = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-        alert(`login succeeded for: ${auth.currentUser.uid + ' - ' + auth.currentUser.email}`);
-        try {
-          const reportsCollection = collection(db, 'reports');
-          const snapshot = await getDocs(reportsCollection);
-        //   snapshot.forEach(doc=>{
-        //     alert(doc.get('comments'));
-        //   });
-        //   const docData = {
-        //       stringExample: "Hello world!",
-        //       booleanExample: true,
-        //       numberExample: 3.14159265,
-        //       dateExample: new Date("December 10, 1815"),
-        //       arrayExample: [5, true, "hello"],
-        //       nullExample: null,
-        //       objectExample: {
-        //           a: 5,
-        //           b: {
-        //               nested: "foo"
-        //           }
-        //       }
-        //     };
-        //   alert(JSON.stringify(docData));
-        //   alert(reportsCollection.path);
-        //   const docTest = await addDoc(reportsCollection, docData, auth.currentUser.uid);
-        }
-        catch (e) {
-          alert("Error adding document: " + e);
-          console.error("Error adding document: ", e);
-        }
-    }
-    catch (error) {
-        showLoginError(error);
-    }
+const SigninEmailPassword = async () => {
+  const SigninEmail = txtEmail.value;
+  const SigninPassword = txtPassword.value;
+  try {
+      const signin = await signInWithEmailAndPassword(auth, SigninEmail, SigninPassword);
+      showFormSection(signin);
+      try {
+        const reportsCollection = collection(db, 'reports');
+        const snapshot = await getDocs(reportsCollection);
+      //   snapshot.forEach(doc=>{
+      //     alert(doc.get('comments'));
+      //   });
+      //   const docData = {
+      //       stringExample: "Hello world!",
+      //       booleanExample: true,
+      //       numberExample: 3.14159265,
+      //       dateExample: new Date("December 10, 1815"),
+      //       arrayExample: [5, true, "hello"],
+      //       nullExample: null,
+      //       objectExample: {
+      //           a: 5,
+      //           b: {
+      //               nested: "foo"
+      //           }
+      //       }
+      //     };
+      //   alert(JSON.stringify(docData));
+      //   alert(reportsCollection.path);
+      //   const docTest = await addDoc(reportsCollection, docData, auth.currentUser.uid);
+      }
+      catch (e) {
+        alert("Error adding document: " + e);
+        console.error("Error adding document: ", e);
+      }
+  }
+  catch (error) {
+      showSigninError(error);
+  }
 };
-btnLogin.addEventListener('click', loginEmailPassword);
+btnSignin.addEventListener('click', SigninEmailPassword);
 
 const createAccount = async () => {
-    const loginEmail = txtEmail.value;
-    const loginPassword = txtPassword.value;
+    const SigninEmail = txtEmail.value;
+    const SigninPassword = txtPassword.value;
     try {
-        const signup = await createUserWithEmailAndPassword(auth, loginEmail, loginPassword);
-        alert('acct created');
+        const signup = await createUserWithEmailAndPassword(auth, SigninEmail, SigninPassword);
+        showFormSection(signup);
     }
     catch (error) {
         alert('error creating acct');

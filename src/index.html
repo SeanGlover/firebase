@@ -27,16 +27,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <!-- https://getbootstrap.com/docs/4.0/utilities/spacing/ -->
 <!-- https://mdbootstrap.com/docs/standard/utilities/spacing/ -->
 <body style="font-family: raleway;">
-    <section class="text-center">
+    <section class="text-center" id="sectionSignin">
         <!-- Background image -->
         <div class="p-5 bg-image" style="background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg'); height: 200px;"></div>
         <div class="card mx-auto shadow-5-strong"
@@ -67,8 +63,9 @@
 
                         <!-- Email input -->
                         <div class="form-outline mb2" style="text-align: left">
-                            <input type="email" id="txtEmail" class="form-control" />
+                            <input type="email" id="txtEmail" class="form-control"/>
                             <label class="form-label" for="txtEmail">Email address</label>
+                            <label class="form-label" id="lblSigninErrorMsg" style="display: none; color: crimson; float: right;">Wrong userid or password. Try again.</label>
                         </div>
 
                         <!-- Password input -->
@@ -78,9 +75,6 @@
                                 <span style="float: left; cursor: pointer;">Show</span>
                                 <a class="text-muted" id="forgotPassword" style="float: right;" href="#!">Forgot password?</a>
                             </div>
-                        </div>
-                        <div class="form-outline mb2" style="text-align: left" id="divLoginError" style="display: none;">
-                            <label class="form-label" id="lblLoginErrorMsg" style="color: crimson;"></label>
                         </div>
 
                         <!-- Checkbox -->
@@ -93,8 +87,8 @@
 
                         <!-- Submit button -->
                         <div class="text-left pt-1 my-2 pb-1">
-                            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mr-6" type="button" id="btnLogin">
-                                Log in
+                            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mr-6" type="button" id="btnSignin">
+                                Sign in
                             </button>
                         </div>
                         <div class="d-flex align-items-left justify-content-left">
@@ -140,6 +134,9 @@
                 </div>
             </div>
         </div>
+    </section>
+    <section class="text-center" id="sectionForm" style="display: none;">
+
     </section>
 </body>
 </html>
