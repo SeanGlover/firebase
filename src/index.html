@@ -72,11 +72,11 @@
                         </div>
 
                         <!-- Password input -->
-                        <div class="form-outline mb2" style="text-align: left">
-                            <input type="password" id="txtPassword" class="form-control" value="78Qm7LPEX32^mUD" />
-                            <label class="form-label" for="txtPassword" id="">Password</label>
-                            <div class="hide-show">
-                                <span style="margin-top: -53px;">Show</span>
+                        <div class="form-outline mb4" style="text-align: left">
+                            <input type="password" placeholder="Password" id="txtPassword" class="form-control" value="78Qm7LPEX32^mUD" />
+                            <div class="hide-show" style="display: none">
+                                <span style="float: left; cursor: pointer;">Show</span>
+                                <a class="text-muted" id="forgotPassword" style="float: right;" href="#!">Forgot password?</a>
                             </div>
                         </div>
                         <div class="form-outline mb2" style="text-align: left" id="divLoginError" style="display: none;">
@@ -92,14 +92,13 @@
                         </div> -->
 
                         <!-- Submit button -->
-                        <div class="text-center pt-1 mb-2 pb-1">
+                        <div class="text-left pt-1 my-2 pb-1">
                             <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mr-6" type="button" id="btnLogin">
                                 Log in
                             </button>
-                            <a class="text-muted" id="forgotPassword" href="#!">Forgot password?</a>
                         </div>
-                        <div class="d-flex align-items-center justify-content-center pb-2">
-                            <p class="mb-0 me-2">Don't have an account?</p>
+                        <div class="d-flex align-items-left justify-content-left">
+                            <p class="my-3 me-2" style="text-align: center;">Don't have an account?</p>
                             <button type="button" class="btn btn-outline-secondary" id="btnSignup">Create new</button>
                         </div>
 
