@@ -60,27 +60,30 @@ const loginEmailPassword = async () => {
     const loginPassword = txtPassword.value;
     try {
         const signin = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-        alert(`login succeeded for: ${auth.currentUser.displayName}`);
+        alert(`login succeeded for: ${auth.currentUser.uid + ' - ' + auth.currentUser.email}`);
         try {
           const reportsCollection = collection(db, 'reports');
           const snapshot = await getDocs(reportsCollection);
-          const docData = {
-              stringExample: "Hello world!",
-              booleanExample: true,
-              numberExample: 3.14159265,
-              dateExample: new Date("December 10, 1815"),
-              arrayExample: [5, true, "hello"],
-              nullExample: null,
-              objectExample: {
-                  a: 5,
-                  b: {
-                      nested: "foo"
-                  }
-              }
-            };
-          alert(JSON.stringify(docData));
-          alert(reportsCollection.path);
-          const docTest = await addDoc(reportsCollection, docData, getAuth().currentUser.uid);
+        //   snapshot.forEach(doc=>{
+        //     alert(doc.get('comments'));
+        //   });
+        //   const docData = {
+        //       stringExample: "Hello world!",
+        //       booleanExample: true,
+        //       numberExample: 3.14159265,
+        //       dateExample: new Date("December 10, 1815"),
+        //       arrayExample: [5, true, "hello"],
+        //       nullExample: null,
+        //       objectExample: {
+        //           a: 5,
+        //           b: {
+        //               nested: "foo"
+        //           }
+        //       }
+        //     };
+        //   alert(JSON.stringify(docData));
+        //   alert(reportsCollection.path);
+        //   const docTest = await addDoc(reportsCollection, docData, auth.currentUser.uid);
         }
         catch (e) {
           alert("Error adding document: " + e);
