@@ -1,0 +1,13 @@
+.hide-show {
+    width: 94%;
+    z-index: 5;
+    display: none;
+    margin-top: -10px;
+}
+    span {
+        background: white;
+        font-size: 1em;
+        /* padding: .5em; */
+        float: right;
+        cursor: pointer;
+      }

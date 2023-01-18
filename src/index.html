@@ -75,6 +75,9 @@
                         <div class="form-outline mb2" style="text-align: left">
                             <input type="password" id="txtPassword" class="form-control" value="78Qm7LPEX32^mUD" />
                             <label class="form-label" for="txtPassword" id="">Password</label>
+                            <div class="hide-show">
+                                <span style="margin-top: -53px;">Show</span>
+                            </div>
                         </div>
                         <div class="form-outline mb2" style="text-align: left" id="divLoginError" style="display: none;">
                             <label class="form-label" id="lblLoginErrorMsg" style="color: crimson;"></label>
@@ -116,6 +119,23 @@
                             <i class="fab fa-github"></i>
                         </button>
                         </div> -->
+                        <script>
+                            $(function(){
+                                $('.hide-show').show();
+                                $('.hide-show span').addClass('show')  
+                                $('.hide-show span').click(function(){
+                                    if( $(this).hasClass('show') ) {
+                                    $(this).text('Hide');
+                                    $('#txtPassword').attr('type','text');
+                                    $(this).removeClass('show');
+                                    } else {
+                                    $(this).text('Show');
+                                    $('#txtPassword').attr('type','password');
+                                    $(this).addClass('show');
+                                    }
+                                });
+                            });
+                        </script>
                     </form>
                     </div>
                 </div>
