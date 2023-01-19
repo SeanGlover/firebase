@@ -3,10 +3,6 @@
     "reports": {
       ".read": "true",
       ".write": "true"
-    },
-    "messages": {
-      ".read": "true",
-      ".write": "true"
     }
   }
 }
