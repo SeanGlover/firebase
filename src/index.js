@@ -1,4 +1,6 @@
+// import './styles.css';
 import {
+    txtNameFirst,
     txtEmail,
     txtPassword,
     btnSignin,
@@ -13,11 +15,13 @@ import {
     showApp,
     btnSignout
 } from './ui';
-// import './styles.css';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js
 import { getAnalytics } from 'firebase/analytics'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js
+import { getAuth, onAuthStateChanged, connectAuthEmulator, signInWithEmailAndPassword, updateProfile, createUserWithEmailAndPassword } from 'firebase/auth'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js
+import { getFirestore, collection, getDocs, getDoc, doc, addDoc, setDoc } from 'firebase/firestore'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -35,18 +39,11 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 const analytics = getAnalytics(app);
 
-import {
-    getAuth,
-    onAuthStateChanged,
-    connectAuthEmulator,
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword
-} from 'firebase/auth'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js
-
 //#region auth / Signin
-const auth = getAuth(app);
 connectAuthEmulator(auth, 'http://localhost:9099');
 onAuthStateChanged(auth, user => {
     if(user!=null) {
@@ -64,56 +61,58 @@ const SigninEmailPassword = async () => {
       const signin = await signInWithEmailAndPassword(auth, SigninEmail, SigninPassword);
       showFormSection(signin);
       try {
-        const reportsCollection = collection(db, 'reports');
-        const snapshot = await getDocs(reportsCollection);
-      //   snapshot.forEach(doc=>{
-      //     alert(doc.get('comments'));
-      //   });
-      //   const docData = {
-      //       stringExample: "Hello world!",
-      //       booleanExample: true,
-      //       numberExample: 3.14159265,
-      //       dateExample: new Date("December 10, 1815"),
-      //       arrayExample: [5, true, "hello"],
-      //       nullExample: null,
-      //       objectExample: {
-      //           a: 5,
-      //           b: {
-      //               nested: "foo"
-      //           }
-      //       }
-      //     };
-      //   alert(JSON.stringify(docData));
-      //   alert(reportsCollection.path);
-      //   const docTest = await addDoc(reportsCollection, docData, auth.currentUser.uid);
+        // const reportsCollection = collection(db, 'reports');
+        // const snapshot = await getDocs(reportsCollection);
+        //   snapshot.forEach(doc=>{
+        //     alert(doc.get('comments'));
+        //   });
+        //   const docData = {
+        //       stringExample: "Hello world!",
+        //       booleanExample: true,
+        //       numberExample: 3.14159265,
+        //       dateExample: new Date("December 10, 1815"),
+        //       arrayExample: [5, true, "hello"],
+        //       nullExample: null,
+        //       objectExample: {
+        //           a: 5,
+        //           b: {
+        //               nested: "foo"
+        //           }
+        //       }
+        //     };
+        //   alert(JSON.stringify(docData));
+        //   alert(reportsCollection.path);
+        //   const docTest = await addDoc(reportsCollection, docData, auth.currentUser.uid);
       }
       catch (e) {
-        alert("Error adding document: " + e);
-        console.error("Error adding document: ", e);
+        // alert("Error adding document: " + e);
+        // console.error("Error adding document: ", e);
       }
   }
   catch (error) {
-      showSigninError(error);
+    showSigninError(error);
   }
 };
-btnSignin.addEventListener('click', SigninEmailPassword);
-
 const createAccount = async () => {
-    const SigninEmail = txtEmail.value;
-    const SigninPassword = txtPassword.value;
-    try {
-        const signup = await createUserWithEmailAndPassword(auth, SigninEmail, SigninPassword);
+  const SigninEmail = txtEmail.value;
+  const SigninPassword = txtPassword.value;
+  try {
+      const signup = await createUserWithEmailAndPassword(auth, SigninEmail, SigninPassword);
+      updateProfile(auth.currentUser, {
+        displayName: txtNameFirst.value,
+        photoURL: "https://example.com/jane-q-user/profile.jpg"
+      }).then(() => {
+        // Profile updated!
         showFormSection(signup);
-    }
-    catch (error) {
-        alert('error creating acct');
-    }
+      }).catch((error) => {
+        // An error occurred
+        // ... alert()???
+      });
+  }
+  catch (error) {
+      alert(error);
+  }
 };
-btnSignup.addEventListener('click', createAccount);
-//#endregion
-
-import { getFirestore, collection, getDocs, getDoc, doc, addDoc, setDoc } from 'firebase/firestore'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js
-const db = getFirestore(app);
 const forgotPassword = async () => {
   try {
     // const reportsCollection = collection(db, 'reports');
@@ -141,4 +140,10 @@ const forgotPassword = async () => {
     // console.error("Error adding document: ", e);
   }
 };
-lnkForgotPwd.addEventListener('click', forgotPassword);
+
+window.onload=function() {
+  btnSignin.addEventListener('click', SigninEmailPassword);
+  btnSignup.addEventListener('click', createAccount);
+  lnkForgotPwd.addEventListener('click', forgotPassword);
+}
+//#endregion

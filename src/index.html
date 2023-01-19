@@ -27,7 +27,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap">
 
+    <script src="../dist/bundle.js"></script>
     <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
 </head>
 <!-- https://getbootstrap.com/docs/4.0/utilities/spacing/ -->
 <!-- https://mdbootstrap.com/docs/standard/utilities/spacing/ -->
@@ -136,7 +138,515 @@
         </div>
     </section>
     <section class="text-center" id="sectionForm" style="display: none;">
-
+        <img src="images/fhSnoezelen.png" class="rounded mx-auto d-block" alt="..." style="padding: 20px">
+        <div class="shadow p-3 mb-5 bg-white rounded" style="margin: 9px">
+          <form class="gform pure-form pure-form-stacked" id="mainForm" method="POST" data-email="seanglover.spg@gmail.com" action="https://script.google.com/macros/s/AKfycbyABqfNw4SOsPGcPizonfN4s7V5mRTGcHB_p0LfPG3vq3Ir1aNI-4Iz6Zos0nfggFh72g/exec" onsubmit="formSubmitted()">
+      
+            <!-- User Name: <input type="text" name="name" > <br />
+              User email: <input type="email" name="email" > <br />
+              User Subject: <input type="text" name="subject" > <br />
+              User Message: <textarea name="msg"></textarea>
+              <button type="submit" name="sending_email_btn">Send</button> -->
+      
+            <div class="row" style="padding: 8px 0px 0px 0px; margin: 0px;">
+              <!-- business section -->
+              <div class="col-md-3">
+                <!-- business_name -->
+                <label for="businessName" class="form-label" id="businessNameLabel">Business name</label>
+                <input type="text" class="form-control" name="businessName" id="businessName" value="Centre Le Cap" required="">
+              </div>
+              <div class="col-md-4">
+                <!-- purchase_order -->
+                <label for="purchaseOrder" class="form-label" id="purchaseOrderLabel">Purchase order</label>
+                <input type="text" class="form-control" name="purchaseOrder" id="purchaseOrder" value="P0917654 / P0927227" required="">
+                <div class="invalid-feedback">
+                  Please provide a valid street.
+                </div>
+              </div>
+              <div class="col-lg-3 col-sm-6">
+                <!-- document_date -->
+                <label for="documentDate" class="form-label">Document date</label>
+                <div class="input-group">
+                  <input id="documentDate" class="form-control" type="date" value="2023-01-11">
+                </div>
+              </div>
+            </div>
+            <div class="row" style="padding: 8px 0px 0px 0px; margin: 0px;">
+              <!-- address -->
+              <div class="col-md-6">
+                <!-- street -->
+                <label for="addressStreet" class="form-label" id="addressStreetLabel">Street</label>
+                <input type="text" class="form-control" id="addressStreet" value="Suite 300 150 Montreal Rd," required="">
+                <div class="invalid-feedback">
+                  Please provide a valid street.
+                </div>
+              </div>
+              <div class="col-md-2">
+                <!-- city -->
+                <label for="addressCity" class="form-label" id="addressCityLabel">City</label>
+                <input type="text" class="form-control" id="addressCity" value="Ottawa" required="">
+                <div class="invalid-feedback">
+                  Please provide a valid city.
+                </div>
+              </div>
+              <div class="col-md-2">
+                <!-- provinces -->
+                <label for="provinces" class="form-label">Province</label>
+                <select class="form-select" id="provinces" value="Québec" required="">
+                  <option id="provincesLabel">Choose a province
+                  <option id="AB" value="AB">Alberta
+                  <option id="BC" value="BC">British Columbia
+                  <option id="MB" value="MB">Manitoba
+                  <option id="NB" value="NB">New Brunswick
+                  <option id="NL" value="NL">Newfoundland and Labrador
+                  <option id="NS" value="NS">Nova Scotia
+                  <option id="NT" value="NT">Northwest Territories
+                  <option id="NU" value="NU">Nunavut
+                  <option id="ON" value="ON" selected="""">Ontario
+                  <option id="PE" value="PE">Prince Edward Island
+                  <option id="QC" value="QC">Québec
+                  <option id="SK" value="SK">Saskatchewan
+                  <option id="YK" value="YK">Yukon
+                </select>
+                <div class="invalid-feedback">
+                  Please select a valid province.
+                </div>
+              </div>
+              <div class="col-md-1">
+                <!-- postal_code -->
+                <label for="addressPostalCode" class="form-label" id="addressPostalCodeLabel">Postal code</label>
+                <input type="text" class="form-control" id="addressPostalCode" required="" value="K1L H82">
+                <div class="invalid-feedback">
+                  Please provide a valid postal code.
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-left" style="padding: 8px 0px 0px 0px; margin: 0px;">
+              <!-- contact section -->
+              <div class="col-md-2">
+                <!-- contact_name -->
+                <label for="contactName" class="form-label" id="contactNameLabel">Contact name</label>
+                <input type="text" class="form-control" id="contactName" value="Nadine Ouellet-Scott" required="">
+              </div>
+              <div class="col-md-3">
+                <!-- contact_title -->
+                <label for="contactTitle" class="form-label" id="contactTitleLabel">Contact title</label>
+                <input type="text" class="form-control" id="contactTitle" value="Program and services coordinator" required="">
+              </div>
+              <div class="col-md-4">
+                <!-- contact_email -->
+                <label for="contactEmail" class="form-label" id="contactEmailLabel">Contact email</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-envelope"></i></span>
+                  <input type="text" class="form-control" id="contactEmail" value="Nouelletscott@Centrelecap.Ca" aria-describedby="inputGroupPrepend" required="">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <!-- contact_phone -->
+                <label for="" class="form-label" id="contactPhoneLabel">Contact phone</label>
+                <div class="input-group has-validation">
+                  <span class="input-group-text" id="inputGroupPrepend"><i class="bi bi-telephone"></i></span>
+                  <input type="text" class="form-control" id="contactPhone" value="613-866-7013" aria-describedby="inputGroupPrepend" required="">
+                </div>
+              </div>
+            </div>
+            <div class="row" style="padding: 8px 0px 0px 0px; margin: 0px;">
+              <!-- installation section -->
+              <div class="col-md-3">
+                <!-- installer_name -->
+                <div class="input-group has-validation">
+                  <span class="input-group-text" id="installerNameLabel">Installer name</span>
+                  <input type="text" class="form-control" id="installerName" value="Sean Glover" aria-describedby="inputGroupPrepend" required="">
+                </div>
+              </div>
+              <div class="col-md-2">
+                <!-- installation_types -->
+                <div class="input-group">
+                  <span class="input-group-text">Call type</span>
+                  <select class="form-select" id="types" value="Installation" required="">
+                    <option selected="" disabled="">Types
+                    <option value="I" id="" selected="">Installation
+                    <option value="W" id="optionTypeLabel">Warranty
+                    <option value="S" id="">Service
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <!-- status_checkbox -->
+                <div class="input-group col-3">
+                  <div class="input-group-text">
+                    <input class="form-check-input mt-0" type="checkbox" id="checkComplete" value="checked" aria-label="Checkbox for following text input">
+                  </div>
+                  <input type="text" class="form-control" aria-label="Text input with checkbox" id="checkCompleteLabel" value="Check if complete">
+                </div>
+              </div>
+              <div class="col-lg-2 col-sm-6">
+                <!-- start_date -->
+                <div class="input-group">
+                  <span class="input-group-text" id="startDateLabel">Start</span>
+                  <input id="startDate" name="startDate" class="form-control" type="date" value="2022-11-22">
+                </div>
+              </div>
+              <div class="col-lg-2 col-sm-6">
+                <!-- end_date -->
+                <div class="input-group">
+                  <span class="input-group-text" id="endDateLabel">End</span>
+                  <input id="endDate" name="endDate" class="form-control" type="date" value="2022-11-23">
+                </div>
+              </div>
+            </div>
+      
+            <li class="flex-fill list-group-item" style="text-align: center; background-color: #4267B2; color: white; margin: 8px 8px 0px 0px;">Serialized products</li>
+            <ul class="list-group list-group-horizontal" style="margin: 1px;">
+              <li class="flex-fill list-group-item" id="r1c1_serial">41752 Rainbow Bumpas- Set Of 3 [N° 535]</li>
+              <li class="flex-fill list-group-item" id="r1c2_serial">21098RO Sensory Magic [N° 992]</li>
+              <li class="flex-fill list-group-item" id="r1c3_serial">41671 Maxi Bubble Tube Chassis Slim Profile [N° 10601657]</li>
+            </ul>
+            <ul class="list-group list-group-horizontal" style="margin: 1px;">
+              <li class="flex-fill list-group-item" id="r2c1_serial">41148 Wireless Controller [N° 3752]</li>
+              <li class="flex-fill list-group-item" id="r2c2_serial">41541 Interative Light Engine [N° 10877]</li>
+              <li class="flex-fill list-group-item" id="r2c3_serial">42090 Ust Projector [N° Q7C6150HAAAAB0140]</li>
+            </ul>
+            <ul class="list-group list-group-horizontal" style="margin: 1px;">
+              <li class="flex-fill list-group-item" id="r3c1_serial">37969 Laser Stars™ [N° 114308_jan2022]</li>
+              <li class="flex-fill list-group-item" id="r3c2_serial">41655 Wi Fi Color Wall Controller [N° 1987]</li>
+              <li class="flex-fill list-group-item" id="r3c3_serial">21001R Wifi Led Furniture Cube [N° 1312]</li>
+            </ul>
+            <ul class="list-group list-group-horizontal" style="margin: 1px;">
+              <li class="flex-fill list-group-item" id="r4c1_serial">22870R Sound To Sight Showtime Panel [N° 10642603]</li>
+              <li class="flex-fill list-group-item" id="r4c2_serial">22873R Color Catch Combo Panel [N° 10642807]</li>
+              
+            </ul>
+            <ul class="list-group list-group-horizontal" style="margin: 1px;">
+              
+              
+              
+            </ul>
+            <ul class="list-group list-group-horizontal" style="margin: 1px;">
+              
+              
+              
+            </ul>
+            <li class="flex-fill list-group-item" style="text-align: center; background-color: #DCDCDC; color: black; margin: 8px 8px 0px 0px;">Trained products</li>
+            <ul class="list-group list-group-horizontal" style="margin: 1px;">
+              <li class="flex-fill list-group-item" id="r1c1_trained">41838 Acrylic Mirror- L96" X W48"</li>
+              <li class="flex-fill list-group-item" id="r1c2_trained">41576 Maxi Bubble Tube</li>
+              <li class="flex-fill list-group-item" id="r1c3_trained">42248 Univ Flat Wall Mtn For 10-24 In Display</li>
+            </ul>
+            <ul class="list-group list-group-horizontal" style="margin: 1px;">
+              <li class="flex-fill list-group-item" id="r2c1_trained">41752 Rainbow Bumpas- Set Of 3</li>
+              <li class="flex-fill list-group-item" id="r2c2_trained">21098RO Sensory Magic</li>
+              <li class="flex-fill list-group-item" id="r2c3_trained">41671 Maxi Bubble Tube Chassis Slim Profile</li>
+            </ul>
+            <ul class="list-group list-group-horizontal" style="margin: 1px;">
+              <li class="flex-fill list-group-item" id="r3c1_trained">41148 Wireless Controller</li>
+              <li class="flex-fill list-group-item" id="r3c2_trained">42090 Ust Projector</li>
+              <li class="flex-fill list-group-item" id="r3c3_trained">37969 Laser Stars™</li>
+            </ul>
+            <ul class="list-group list-group-horizontal" style="margin: 1px;">
+              <li class="flex-fill list-group-item" id="r4c1_trained">41655 Wi Fi Color Wall Controller</li>
+              <li class="flex-fill list-group-item" id="r4c2_trained">21001R Wifi Led Furniture Cube</li>
+              <li class="flex-fill list-group-item" id="r4c3_trained">22870R Sound To Sight Showtime Panel</li>
+            </ul>
+            <ul class="list-group list-group-horizontal" style="margin: 1px;">
+              <li class="flex-fill list-group-item" id="r5c1_trained">22873R Color Catch Combo Panel</li>
+              
+              
+            </ul>
+            <ul class="list-group list-group-horizontal" style="margin: 1px;">
+              
+              
+              
+            </ul>
+      
+            <li class="flex-fill list-group-item" style="text-align: center; background-color: #E6E6FA; color: black; margin: 8px 8px 0px 0px;">Trained staff</li>
+            <ul class="list-group list-group-horizontal" style="margin: 1px;">
+              <li class="flex-fill list-group-item" id="r1c1_staff">? in lieu of Nadine</li>
+              
+              
+            </ul>
+      
+            <div class="form-floating" style="padding: 3px;">
+              <!-- comments -->
+              <textarea class="form-control" placeholder="Leave a comment here" id="comments" oninput="auto_grow(this)">Client will add electrical for the projector / wall washer after-the-fact</textarea>
+              <label for="comments" style="color: CornflowerBlue; font-weight: bold;">Comments</label>
+            </div>
+            <div class="form-floating" style="padding: 3px;">
+              <!-- issues -->
+              <textarea class="form-control" placeholder="Leave a comment here" id="issues" oninput="auto_grow(this)">Wall washer requires adjustment as per below instructions... 
+      ● Repeatedly press the “MODE” button on the wall washer until the display on the back of the wall washer displays “Addr.”
+      ● Now repeatedly press the “SET UP” button until the display shows “d.001” (or similar number).
+      ● Press “UP” and “DOWN” until the display shows “d.001”. Now press the “SET UP” button once.
+      ● Use the “UP” and “DOWN” buttons to select “03C.H”</textarea>
+              <label for="issues" style="color: CornflowerBlue; font-weight: bold;">Issues</label>
+            </div>
+            <div class="form-floating" style="padding: 3px;">
+              <!-- client comments -->
+              <textarea class="form-control" name="clientComments" placeholder="Leave a comment here" id="clientComments" oninput="auto_grow(this)"></textarea>
+              <label for="clientComments" style="color: CornflowerBlue; font-weight: bold;">Client comments</label>
+            </div>
+      
+            <div class="row" style="padding: 8px 0px 0px 0px; margin: 0px;">
+              <!-- address -->
+              <div class="col-md-9">
+                <!-- client_signature -->
+                <div class="input-group has-validation">
+                  <span class="input-group-text" id="clientSignatureLabel">Client signature</span>
+                  <input type="text" class="form-control" name="signedBy" id="clientSignature" value="" aria-describedby="inputGroupPrepend" required="" placeholder="Type your name">
+                </div>
+              </div>
+              <div class="col-lg-3 col-sm-6">
+                <!-- sign_date -->
+                <div class="input-group">
+                  <span class="input-group-text" id="signDateLabel">Dated</span>
+                  <input id="signDate" class="form-control" type="date" value="">
+                </div>
+              </div>
+            </div>
+      
+            <div class="container d-flex justify-content-center align-items-center">
+              <div class="card h-100 p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                  <!-- overall -->
+                  <div class="ratings" id="starsOverall">
+                    <img src="images\starEmpty.png" id="1-overall" height="22" width="22">
+                    <img src="images\starEmpty.png" id="2-overall" height="22" width="22">
+                    <img src="images\starEmpty.png" id="3-overall" height="22" width="22">
+                    <img src="images\starEmpty.png" id="4-overall" height="22" width="22">
+                    <img src="images\starEmpty.png" id="5-overall" height="22" width="22">
+                  </div>
+                  <h3 class="review-count" id="overallRatingLabel" style="padding: 0px;">Overall rating</h3>
+                </div>
+                <div class="mt-1 d-flex justify-content-between align-items-center">
+                  <!-- professionalism -->
+                  <h5 class="review-stat">Installer professionalism</h5>
+                  <div class="small-ratings" id="starsProf">
+                    <img src="images\starEmpty.png" id="1-profesional" height="16" width="16">
+                    <img src="images\starEmpty.png" id="2-profesional" height="16" width="16">
+                    <img src="images\starEmpty.png" id="3-profesional" height="16" width="16">
+                    <img src="images\starEmpty.png" id="4-profesional" height="16" width="16">
+                    <img src="images\starEmpty.png" id="5-profesional" height="16" width="16">
+                  </div>
+                </div>
+                <div class="mt-1 d-flex justify-content-between align-items-center">
+                  <!-- prompt -->
+                  <h5 class="review-stat">Installer promptness</h5>
+                  <div class="small-ratings" id="starsPrompt">
+                    <img src="images\starEmpty.png" id="1-prompt" height="16" width="16">
+                    <img src="images\starEmpty.png" id="2-prompt" height="16" width="16">
+                    <img src="images\starEmpty.png" id="3-prompt" height="16" width="16">
+                    <img src="images\starEmpty.png" id="4-prompt" height="16" width="16">
+                    <img src="images\starEmpty.png" id="5-prompt" height="16" width="16">
+                  </div>
+                </div>
+                <div class="mt-1 d-flex justify-content-between align-items-center">
+                  <!-- workmanship -->
+                  <h5 class="review-stat">Installer workmanship</h5>
+                  <div class="small-ratings" id="starsWork">
+                    <img src="images\starEmpty.png" id="1-workmanship" height="16" width="16">
+                    <img src="images\starEmpty.png" id="2-workmanship" height="16" width="16">
+                    <img src="images\starEmpty.png" id="3-workmanship" height="16" width="16">
+                    <img src="images\starEmpty.png" id="4-workmanship" height="16" width="16">
+                    <img src="images\starEmpty.png" id="5-workmanship" height="16" width="16">
+                  </div>
+                </div>
+                <div class="mt-1 d-flex justify-content-between align-items-center">
+                  <!-- product_quality -->
+                  <h5 class="review-stat">Product quality</h5>
+                  <div class="small-ratings" id="starsQuality">
+                    <img src="images\starEmpty.png" id="1-quality" height="16" width="16">
+                    <img src="images\starEmpty.png" id="2-quality" height="16" width="16">
+                    <img src="images\starEmpty.png" id="3-quality" height="16" width="16">
+                    <img src="images\starEmpty.png" id="4-quality" height="16" width="16">
+                    <img src="images\starEmpty.png" id="5-quality" height="16" width="16">
+                  </div>
+                </div>
+              </div>
+            </div>
+      
+            <div class="col-12">
+              <!-- terms_checkbox -->
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="agreeTermsCheck" required="">
+                <label class="form-check-label" for="agreeTermsCheck">
+                  Agree to terms and conditions
+                </label>
+                <div class="invalid-feedback">
+                  You must agree before submitting.
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <!-- submit_form -->
+              <button class="button-success pure-button button-xlarge" type="submit" style="padding: 10px 30px 10px 30px;" id="submitForm">
+                <i class="fa fa-paper-plane" id="submitImg"></i>
+                &nbsp;Submit
+              </button>
+            </div>
+      
+            <input class="honeypot-field" id="starsProf_" type="text" name="professional" value="">
+            <input class="honeypot-field" id="starsPrompt_" type="text" name="prompt" value="">
+            <input class="honeypot-field" id="starsWork_" type="text" name="workmanship" value="">
+            <input class="honeypot-field" id="starsQuality_" type="text" name="quality" value="">
+            <input class="honeypot-field" id="serials" type="text" name="serials" value="">
+      
+            <fieldset class="pure-group honeypot-field">
+              <label for="honeypot">To help avoid spam, use a Honeypot technique with a hidden text field; must be empty to submit the form! Otherwise, we assume the user is a spam bot.</label>
+              <input id="honeypot" type="text" name="honeypot" value="">
+            </fieldset>
+          </form>
+          <form id="thankYouMessage" style="display: none">
+            <div class="jumbotron text-center">
+              <h1 class="display-3">Thank You!</h1>
+              <p class="lead" id="appreciateIt"><strong>We have received your submission.</strong> We'll take it from here!</p>
+              <hr>
+              <button class="pure-button button-medium" style="padding: 10px 30px 10px 30px;" id="reload" onclick="window.location.reload();">
+                <i class="fa fa-arrow-left"></i>
+                &nbsp;Return to original form
+              </button>
+              <p>
+                Visit us!
+                <a href="https://www.flaghouse.ca/">Continue to homepage</a>
+              </p>
+            </div>
+            <footer class="site-footer" id="footer">
+              <p class="site-footer__fineprint" id="fineprint">FlagHouse, Inc. | 50 East Wilmot Street, Suite 201 | Richmond Hill, ON L4B 3Z3 | Copyright ©2005 - 2023, All Rights Reserved</p>
+            </footer>
+          </form>
+        </div>
+        Submit the Form to Google Using "AJAX" -->
+        <script data-cfasync="false" src="form-submission-handler.js">
+        </script>
+        <script>
+          $(document).ready(function() {
+            document.getElementById('checkComplete').click();
+            document.getElementById('agreeTermsCheck').click();
+            // can't get jquery to find the element? but document.getElementById does
+            // ... maybe because jquery doesn't kick in right away- even after document load
+            // the star img functionality is all jquery which does work but a user would only click many seconds after load
+            var date = new Date();
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+            var today = year + "-" + month + "-" + day;
+            document.getElementById('signDate').value = today;
+          });
+          $("img").click(function(e) {
+            if (!this.id.endsWith('overall')) {
+              var clickedStar = this; // Save reference
+              var clickedIndex = parseInt(clickedStar.id.substr(0, 1));
+              var firstIsFill = $(clickedStar).attr('alt') == 'fill' & clickedIndex == 1;
+              var parent = clickedStar.closest("div");
+              var childIndex = 1;
+              var starLeft = clickedStar.getBoundingClientRect().left;
+              var starWidth = clickedStar.getBoundingClientRect().width;
+              var starMid = starLeft + (starWidth / 2);
+              var clickedLoC = e.pageX < starMid;
+      
+              $(parent).children()
+                .each(function() {
+                  // "this" is the current child in the loop grabbing this element in the form of string
+                  var childStar = $(this);
+                  childStar.attr('src', "images/starEmpty.png");
+                  childStar.attr('alt', "empty");
+                  if (childIndex <= clickedIndex) {
+                    if (clickedLoC & childIndex == clickedIndex) {
+                      childStar.attr('src', "images/starHalf.png");
+                      childStar.attr('alt', "half");
+                    } else {
+                      childStar.attr('src', "images/starFill.png");
+                      childStar.attr('alt', "fill");
+                    }
+                  }
+                  childIndex++;
+                });
+      
+              if (firstIsFill) {
+                $(clickedStar).attr('src', "images/starEmpty.png");
+                $(clickedStar).attr('alt', "empty");
+                //alert(firstIsFill);
+              }
+      
+              childIndex = 0;
+              var starsProf = $("#starsProf")[0]; // Equivalent to document.getElementById( "foo" )
+              childIndex += countStars(starsProf);
+      
+              var starsPrompt = $("#starsPrompt")[0];
+              childIndex += countStars(starsPrompt);
+      
+              var starsWork = $("#starsWork")[0];
+              childIndex += countStars(starsWork);
+      
+              var starsQuality = $("#starsQuality")[0];
+              childIndex += countStars(starsQuality);
+      
+              var starCount = countStars($(parent)[0]);
+              document.getElementById(parent.id + '_').value = starCount;
+      
+              var overall = roundNumber(childIndex / 4, 1);
+              var roundToNearestHalf = roundHalf(overall);
+              var floor = Math.floor(overall);
+              var ceiling = Math.ceil(overall);
+              var half = (roundToNearestHalf - floor) >= .5;
+              //alert("overall="+overall+"; nearest="+roundToNearestHalf+"; floor="+floor+"; ceiling="+ceiling+"; half="+half);
+      
+              childIndex = 1;
+              var starsOverall = $("#starsOverall")[0];
+              $(starsOverall).children()
+                .each(function() {
+                  var childStar = $(this);
+                  var isFull = floor <= childIndex;
+                  var isHalf = (ceiling == childIndex) & half;
+                  var isEmpty = childIndex > ceiling;
+                  //alert("index="+childIndex+"; full="+isFull+"; half="+isHalf+"; empty="+isEmpty);
+      
+                  if (isEmpty) {
+                    childStar.attr('src', "images/starEmpty.png");
+                    //alert(childIndex + '<=' + roundToNearestHalf);
+                  } else if (isHalf) {
+                    childStar.attr('src', "images/starHalf.png");
+                    // alert(childIndex + '>' + roundToNearestHalf);
+                  } else if (isFull) {
+                    childStar.attr('src', "images/starFill.png");
+                  }
+                  childIndex++;
+                });
+              var ratingLabel = $("#overallRatingLabel").html();
+              var frenchOrEnglish = $.trim(regexMatch(ratingLabel, /[a-z ]{1,}/gi));
+              $("#overallRatingLabel").html(frenchOrEnglish + ' ' + overall);
+              // alert();
+      
+            }
+          });
+          function formSubmitted(e) {
+            const serials = [];
+            var serialIds = document.querySelectorAll("[id$=_serial]")
+            serialIds.forEach(s => {
+              serials.push(s.innerText);
+            });
+            var serialsJoined = serials.join("|");
+            document.getElementById('serials').value = serialsJoined;
+            var submitImg = document.getElementById('submitImg');
+            submitImg.className = "fa fa-check";
+      
+            var receivedFeedback = document.getElementById('clientComments').value.length > 0;
+            if (!receivedFeedback) {
+              var starsClicked = document.querySelectorAll("[id^=stars][id$=_]");
+              starsClicked.forEach(s => {
+                if (s.value.length > 0) receivedFeedback = true;
+              });
+            }
+            if(receivedFeedback) {
+              var appreciateIt = document.getElementById('appreciateIt');
+              appreciateIt.innerText += ' PS Thanks so much for the feedback : )';
+            }
+            document.getElementById('mainForm').style.display = "none";
+            document.getElementById('thankYouMessage').style.display = "block";
+          }
+        </script>
+      </body>
     </section>
 </body>
 </html>

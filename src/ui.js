@@ -1,4 +1,5 @@
 import { AuthErrorCodes } from "firebase/auth";
+export const txtNameFirst = document.querySelector('#txtFirstName')
 export const txtEmail = document.querySelector('#txtEmail')
 export const txtPassword = document.querySelector('#txtPassword')
 export const btnSignin = document.querySelector('#btnSignin')
@@ -14,7 +15,7 @@ export const sectionForm = document.querySelector('#sectionForm')
 export const showFormSection = (userCreds) => {
     sectionSignin.style.display = 'none'
     sectionForm.style.display = 'block'
-    alert(`Sign in succeeded for: ${userCreds.user.email + ' - ' + userCreds.user.displayName}`);
+    autoSizeTexts();
 }
 export const showSigninSection = () => {
     sectionSignin.style.display = 'block'
@@ -38,4 +39,11 @@ export function showSigninError(error) {
 }
 export const hideSigninError = () => {
     divSigninError.style.display = 'none'
+}
+export function autoSizeTexts() {
+    var txts = document.querySelectorAll("textarea");
+    txts.forEach(element => {
+        element.style.height = "5px";
+        element.style.height = (element.scrollHeight)+"px";
+    });
 }
