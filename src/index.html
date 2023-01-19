@@ -202,7 +202,7 @@
                   <option id="NS" value="NS">Nova Scotia
                   <option id="NT" value="NT">Northwest Territories
                   <option id="NU" value="NU">Nunavut
-                  <option id="ON" value="ON" selected="""">Ontario
+                  <option id="ON" value="ON" selected="">Ontario
                   <option id="PE" value="PE">Prince Edward Island
                   <option id="QC" value="QC">Québec
                   <option id="SK" value="SK">Saskatchewan
@@ -263,7 +263,7 @@
                 <!-- installation_types -->
                 <div class="input-group">
                   <span class="input-group-text">Call type</span>
-                  <select class="form-select" id="types" value="Installation" required="">
+                  <select class="form-select" id="types" value="Installation" required="" name="typeOfVisit">
                     <option selected="" disabled="">Types
                     <option value="I" id="" selected="">Installation
                     <option value="W" id="optionTypeLabel">Warranty
@@ -271,13 +271,11 @@
                   </select>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-2" style="display: flex; justify-content: left; align-items: center;">
                 <!-- status_checkbox -->
-                <div class="input-group col-3">
-                  <div class="input-group-text">
-                    <input class="form-check-input mt-0" type="checkbox" id="checkComplete" value="checked" aria-label="Checkbox for following text input">
-                  </div>
-                  <input type="text" class="form-control" aria-label="Text input with checkbox" id="checkCompleteLabel" value="Check if complete">
+                <div class="form-check form-switch" style="display: inline-block;">
+                  <input class="form-check-input" type="checkbox" id="checkComplete" checked>
+                  <label class="form-check-label" for="checkComplete" id="lblCheckComplete">Complete</label>
                 </div>
               </div>
               <div class="col-lg-2 col-sm-6">
@@ -317,16 +315,6 @@
               <li class="flex-fill list-group-item" id="r4c2_serial">22873R Color Catch Combo Panel [N° 10642807]</li>
               
             </ul>
-            <ul class="list-group list-group-horizontal" style="margin: 1px;">
-              
-              
-              
-            </ul>
-            <ul class="list-group list-group-horizontal" style="margin: 1px;">
-              
-              
-              
-            </ul>
             <li class="flex-fill list-group-item" style="text-align: center; background-color: #DCDCDC; color: black; margin: 8px 8px 0px 0px;">Trained products</li>
             <ul class="list-group list-group-horizontal" style="margin: 1px;">
               <li class="flex-fill list-group-item" id="r1c1_trained">41838 Acrylic Mirror- L96" X W48"</li>
@@ -350,30 +338,20 @@
             </ul>
             <ul class="list-group list-group-horizontal" style="margin: 1px;">
               <li class="flex-fill list-group-item" id="r5c1_trained">22873R Color Catch Combo Panel</li>
-              
-              
             </ul>
-            <ul class="list-group list-group-horizontal" style="margin: 1px;">
-              
-              
-              
-            </ul>
-      
             <li class="flex-fill list-group-item" style="text-align: center; background-color: #E6E6FA; color: black; margin: 8px 8px 0px 0px;">Trained staff</li>
             <ul class="list-group list-group-horizontal" style="margin: 1px;">
               <li class="flex-fill list-group-item" id="r1c1_staff">? in lieu of Nadine</li>
-              
-              
             </ul>
       
             <div class="form-floating" style="padding: 3px;">
               <!-- comments -->
-              <textarea class="form-control" placeholder="Leave a comment here" id="comments" oninput="auto_grow(this)">Client will add electrical for the projector / wall washer after-the-fact</textarea>
+              <textarea class="form-control" placeholder="Leave a comment here" id="comments" oninput="autoSizeTexts(this)">Client will add electrical for the projector / wall washer after-the-fact</textarea>
               <label for="comments" style="color: CornflowerBlue; font-weight: bold;">Comments</label>
             </div>
             <div class="form-floating" style="padding: 3px;">
               <!-- issues -->
-              <textarea class="form-control" placeholder="Leave a comment here" id="issues" oninput="auto_grow(this)">Wall washer requires adjustment as per below instructions... 
+              <textarea class="form-control" placeholder="Leave a comment here" id="issues" oninput="autoSizeTexts(this)">Wall washer requires adjustment as per below instructions... 
       ● Repeatedly press the “MODE” button on the wall washer until the display on the back of the wall washer displays “Addr.”
       ● Now repeatedly press the “SET UP” button until the display shows “d.001” (or similar number).
       ● Press “UP” and “DOWN” until the display shows “d.001”. Now press the “SET UP” button once.
@@ -382,7 +360,7 @@
             </div>
             <div class="form-floating" style="padding: 3px;">
               <!-- client comments -->
-              <textarea class="form-control" name="clientComments" placeholder="Leave a comment here" id="clientComments" oninput="auto_grow(this)"></textarea>
+              <textarea class="form-control" name="clientComments" placeholder="Leave a comment here" id="clientComments" oninput="autoSizeTexts(this)"></textarea>
               <label for="clientComments" style="color: CornflowerBlue; font-weight: bold;">Client comments</label>
             </div>
       
@@ -404,61 +382,72 @@
               </div>
             </div>
       
-            <div class="container d-flex justify-content-center align-items-center">
-              <div class="card h-100 p-3">
-                <div class="d-flex justify-content-between align-items-center">
+            <div class="container d-flex justify-content-center align-items-center pt-2">
+              <div class="card h-100 p-1 col-lg-4">
+                <div class="mt-1 d-flex">
                   <!-- overall -->
-                  <div class="ratings" id="starsOverall">
-                    <img src="images\starEmpty.png" id="1-overall" height="22" width="22">
-                    <img src="images\starEmpty.png" id="2-overall" height="22" width="22">
-                    <img src="images\starEmpty.png" id="3-overall" height="22" width="22">
-                    <img src="images\starEmpty.png" id="4-overall" height="22" width="22">
-                    <img src="images\starEmpty.png" id="5-overall" height="22" width="22">
+                  <div class="small-ratings" id="starsOverall" style="display: flex; justify-content: center; align-items: center; margin-left: 0; margin-right: auto;">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="1-overall" height="22" width="22">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="2-overall" height="22" width="22">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="3-overall" height="22" width="22">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="4-overall" height="22" width="22">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="5-overall" height="22" width="22">
                   </div>
-                  <h3 class="review-count" id="overallRatingLabel" style="padding: 0px;">Overall rating</h3>
+                  <Div class="review-stat" id="overallRating" style="display: flex; justify-content: center; align-items: center; margin-left: auto; margin-right: 0; font-size: large;">Overall rating</Div>
                 </div>
-                <div class="mt-1 d-flex justify-content-between align-items-center">
+                <div class="mt-1 d-flex">
                   <!-- professionalism -->
-                  <h5 class="review-stat">Installer professionalism</h5>
-                  <div class="small-ratings" id="starsProf">
-                    <img src="images\starEmpty.png" id="1-profesional" height="16" width="16">
-                    <img src="images\starEmpty.png" id="2-profesional" height="16" width="16">
-                    <img src="images\starEmpty.png" id="3-profesional" height="16" width="16">
-                    <img src="images\starEmpty.png" id="4-profesional" height="16" width="16">
-                    <img src="images\starEmpty.png" id="5-profesional" height="16" width="16">
+                  <Div class="review-stat">Installer professionalism</Div>
+                  <div class="small-ratings" id="starsPro" style="display: flex; justify-content: center; align-items: center; margin-left: auto; margin-right: 0;">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="1-professional" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="2-professional" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="3-professional" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="4-professional" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="5-professional" height="18" width="18">
                   </div>
                 </div>
-                <div class="mt-1 d-flex justify-content-between align-items-center">
+                <div class="mt-1 d-flex">
                   <!-- prompt -->
-                  <h5 class="review-stat">Installer promptness</h5>
-                  <div class="small-ratings" id="starsPrompt">
-                    <img src="images\starEmpty.png" id="1-prompt" height="16" width="16">
-                    <img src="images\starEmpty.png" id="2-prompt" height="16" width="16">
-                    <img src="images\starEmpty.png" id="3-prompt" height="16" width="16">
-                    <img src="images\starEmpty.png" id="4-prompt" height="16" width="16">
-                    <img src="images\starEmpty.png" id="5-prompt" height="16" width="16">
+                  <Div class="review-stat">Installer prompt</Div>
+                  <div class="small-ratings" id="starsPrompt" style="display: flex; justify-content: center; align-items: center; margin-left: auto; margin-right: 0;">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="1-prompt" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="2-prompt" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="3-prompt" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="4-prompt" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="5-prompt" height="18" width="18">
+                  </div>
+                </div>
+                <div class="mt-1 d-flex">
+                  <!-- courteous -->
+                  <Div class="review-stat">Installer courteous</Div>
+                  <div class="small-ratings" id="starsCourteous" style="display: flex; justify-content: center; align-items: center; margin-left: auto; margin-right: 0;">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="1-courteous" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="2-courteous" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="3-courteous" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="4-courteous" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="5-courteous" height="18" width="18">
                   </div>
                 </div>
                 <div class="mt-1 d-flex justify-content-between align-items-center">
                   <!-- workmanship -->
-                  <h5 class="review-stat">Installer workmanship</h5>
-                  <div class="small-ratings" id="starsWork">
-                    <img src="images\starEmpty.png" id="1-workmanship" height="16" width="16">
-                    <img src="images\starEmpty.png" id="2-workmanship" height="16" width="16">
-                    <img src="images\starEmpty.png" id="3-workmanship" height="16" width="16">
-                    <img src="images\starEmpty.png" id="4-workmanship" height="16" width="16">
-                    <img src="images\starEmpty.png" id="5-workmanship" height="16" width="16">
+                  <Div class="review-stat">Installer workmanship</Div>
+                  <div class="small-ratings" id="starsWork" style="display: flex; justify-content: center; align-items: center; margin-left: auto; margin-right: 0;">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="1-workmanship" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="2-workmanship" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="3-workmanship" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="4-workmanship" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="5-workmanship" height="18" width="18">
                   </div>
                 </div>
                 <div class="mt-1 d-flex justify-content-between align-items-center">
                   <!-- product_quality -->
-                  <h5 class="review-stat">Product quality</h5>
-                  <div class="small-ratings" id="starsQuality">
-                    <img src="images\starEmpty.png" id="1-quality" height="16" width="16">
-                    <img src="images\starEmpty.png" id="2-quality" height="16" width="16">
-                    <img src="images\starEmpty.png" id="3-quality" height="16" width="16">
-                    <img src="images\starEmpty.png" id="4-quality" height="16" width="16">
-                    <img src="images\starEmpty.png" id="5-quality" height="16" width="16">
+                  <Div class="review-stat">Product quality</Div>
+                  <div class="small-ratings" id="starsQuality" style="display: flex; justify-content: center; align-items: center; margin-left: auto; margin-right: 0;">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="1-quality" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="2-quality" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="3-quality" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="4-quality" height="18" width="18">
+                    <img src="images\starEmpty.png" style="display: inline-block; margin: 1px;" id="5-quality" height="18" width="18">
                   </div>
                 </div>
               </div>
@@ -484,11 +473,13 @@
               </button>
             </div>
       
-            <input class="honeypot-field" id="starsProf_" type="text" name="professional" value="">
+            <input class="honeypot-field" id="starsPro_" type="text" name="professional" value="">
             <input class="honeypot-field" id="starsPrompt_" type="text" name="prompt" value="">
+            <input class="honeypot-field" id="starsCourteous_" type="text" name="courteous" value="">
             <input class="honeypot-field" id="starsWork_" type="text" name="workmanship" value="">
             <input class="honeypot-field" id="starsQuality_" type="text" name="quality" value="">
             <input class="honeypot-field" id="serials" type="text" name="serials" value="">
+            <input class="honeypot-field" id="jobComplete" type="text" name="jobComplete" value="Y">
       
             <fieldset class="pure-group honeypot-field">
               <label for="honeypot">To help avoid spam, use a Honeypot technique with a hidden text field; must be empty to submit the form! Otherwise, we assume the user is a spam bot.</label>
@@ -502,7 +493,7 @@
               <hr>
               <button class="pure-button button-medium" style="padding: 10px 30px 10px 30px;" id="reload" onclick="window.location.reload();">
                 <i class="fa fa-arrow-left"></i>
-                &nbsp;Return to original form
+                &nbsp;Return to Sign in page
               </button>
               <p>
                 Visit us!
@@ -514,12 +505,12 @@
             </footer>
           </form>
         </div>
-        Submit the Form to Google Using "AJAX" -->
+        
+        <!-- Submit the Form to Google Using "AJAX" -->
         <script data-cfasync="false" src="form-submission-handler.js">
         </script>
         <script>
           $(document).ready(function() {
-            document.getElementById('checkComplete').click();
             document.getElementById('agreeTermsCheck').click();
             // can't get jquery to find the element? but document.getElementById does
             // ... maybe because jquery doesn't kick in right away- even after document load
@@ -532,6 +523,11 @@
             if (day < 10) day = "0" + day;
             var today = year + "-" + month + "-" + day;
             document.getElementById('signDate').value = today;
+          });
+          $('#checkComplete').click(function(){
+            var lblCheckComplete = document.getElementById('lblCheckComplete');
+            lblCheckComplete.innerText = lblCheckComplete.innerText == 'Complete' ? 'Incomplete' : 'Complete';
+            document.getElementById('jobComplete').value = lblCheckComplete.innerText == 'Complete' ? 'Y' : 'N';
           });
           $("img").click(function(e) {
             if (!this.id.endsWith('overall')) {
@@ -566,15 +562,17 @@
               if (firstIsFill) {
                 $(clickedStar).attr('src', "images/starEmpty.png");
                 $(clickedStar).attr('alt', "empty");
-                //alert(firstIsFill);
               }
       
               childIndex = 0;
-              var starsProf = $("#starsProf")[0]; // Equivalent to document.getElementById( "foo" )
+              var starsProf = $("#starsPro")[0]; // Equivalent to document.getElementById( "foo" )
               childIndex += countStars(starsProf);
       
               var starsPrompt = $("#starsPrompt")[0];
               childIndex += countStars(starsPrompt);
+
+              var starsCourteous = $("#starsCourteous")[0];
+              childIndex += countStars(starsCourteous);
       
               var starsWork = $("#starsWork")[0];
               childIndex += countStars(starsWork);
@@ -584,40 +582,34 @@
       
               var starCount = countStars($(parent)[0]);
               document.getElementById(parent.id + '_').value = starCount;
-      
-              var overall = roundNumber(childIndex / 4, 1);
+              
+              var rankings = document.querySelectorAll("div[id^='stars']"); // count # of stars rankings
+              var overall = roundNumber(childIndex / (rankings.length - 1), 1); // -1 since overall is included
               var roundToNearestHalf = roundHalf(overall);
               var floor = Math.floor(overall);
               var ceiling = Math.ceil(overall);
               var half = (roundToNearestHalf - floor) >= .5;
-              //alert("overall="+overall+"; nearest="+roundToNearestHalf+"; floor="+floor+"; ceiling="+ceiling+"; half="+half);
       
               childIndex = 1;
               var starsOverall = $("#starsOverall")[0];
-              $(starsOverall).children()
-                .each(function() {
+              $(starsOverall).children().each(function() {
                   var childStar = $(this);
                   var isFull = floor <= childIndex;
                   var isHalf = (ceiling == childIndex) & half;
                   var isEmpty = childIndex > ceiling;
-                  //alert("index="+childIndex+"; full="+isFull+"; half="+isHalf+"; empty="+isEmpty);
       
                   if (isEmpty) {
                     childStar.attr('src', "images/starEmpty.png");
-                    //alert(childIndex + '<=' + roundToNearestHalf);
                   } else if (isHalf) {
                     childStar.attr('src', "images/starHalf.png");
-                    // alert(childIndex + '>' + roundToNearestHalf);
                   } else if (isFull) {
                     childStar.attr('src', "images/starFill.png");
                   }
                   childIndex++;
                 });
-              var ratingLabel = $("#overallRatingLabel").html();
+              var ratingLabel = $("#overallRating").html();
               var frenchOrEnglish = $.trim(regexMatch(ratingLabel, /[a-z ]{1,}/gi));
-              $("#overallRatingLabel").html(frenchOrEnglish + ' ' + overall);
-              // alert();
-      
+              $("#overallRating").html(frenchOrEnglish + ' ' + overall);
             }
           });
           function formSubmitted(e) {
@@ -644,6 +636,10 @@
             }
             document.getElementById('mainForm').style.display = "none";
             document.getElementById('thankYouMessage').style.display = "block";
+          }
+          function autoSizeTexts(element){
+            element.style.height = "5px";
+            element.style.height = (element.scrollHeight)+"px";
           }
         </script>
       </body>
