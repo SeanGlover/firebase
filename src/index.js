@@ -61,8 +61,8 @@ const SigninEmailPassword = async () => {
       const signin = await signInWithEmailAndPassword(auth, SigninEmail, SigninPassword);
       showFormSection(signin);
       try {
-        // const reportsCollection = collection(db, 'reports');
-        // const snapshot = await getDocs(reportsCollection);
+        const reportsCollection = collection(db, 'reports');
+        const snapshot = await getDocs(reportsCollection);
         //   snapshot.forEach(doc=>{
         //     alert(doc.get('comments'));
         //   });
@@ -85,8 +85,8 @@ const SigninEmailPassword = async () => {
         //   const docTest = await addDoc(reportsCollection, docData, auth.currentUser.uid);
       }
       catch (e) {
-        // alert("Error adding document: " + e);
-        // console.error("Error adding document: ", e);
+        alert("Error adding document: " + e);
+        console.error("Error adding document: ", e);
       }
   }
   catch (error) {
