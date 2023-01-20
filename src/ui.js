@@ -22,19 +22,26 @@ export const showSigninSection = () => {
     sectionForm.style.display = 'none'
 }
 export function showSigninError(error) {
-    lblSigninErrorMsg.style.display = 'block';
+    lblSigninErrorMsg.style = 'display: inline-block; margin: 1px;';
+    // lblSigninErrorMsg.className = "form-control";
+    // lblSigninErrorMsg.style
+    btnSignup.className = 'btn btn-outline-secondary';
     if (error.code == AuthErrorCodes.INVALID_PASSWORD) {
         lblSigninErrorMsg.innerHTML = 'Wrong userid or password. Try again.';
     }
-    else if(error.code == AuthErrorCodes.INVALID_EMAIL){
+    else if(error.code == AuthErrorCodes.INVALID_EMAIL) {
         lblSigninErrorMsg.innerHTML = 'Email format is not correct. Try again.';
     }
-    else if(error.code == AuthErrorCodes.USER_DELETED){
+    else if(error.code == AuthErrorCodes.USER_DELETED) {
         lblSigninErrorMsg.innerHTML = 'User id not found - create one?';
         btnSignup.className = 'btn btn-outline-danger';
     }
+    else if(error.code == AuthErrorCodes.NETWORK_REQUEST_FAILED) {
+        lblSigninErrorMsg.innerHTML = 'Connection error';
+        lblSigninErrorMsg.className = "fa fa-exclamation-triangle";
+    }
     else {
-        alert(`error: ${error}`);
+        lblSigninErrorMsg.innerHTML = `error: ${error}`;
     }
 }
 export const hideSigninError = () => {

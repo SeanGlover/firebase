@@ -20,6 +20,7 @@ import {
 import { initializeApp } from 'firebase/app'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js
 import { getAnalytics } from 'firebase/analytics'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js
 import { getAuth, onAuthStateChanged, connectAuthEmulator, signInWithEmailAndPassword, updateProfile, createUserWithEmailAndPassword } from 'firebase/auth'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js
+import { getDatabase, ref, set, query, orderByChild, startAt, onValue} from "firebase/database";
 import { getFirestore, collection, getDocs, getDoc, doc, addDoc, setDoc } from 'firebase/firestore'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -28,19 +29,21 @@ import { getFirestore, collection, getDocs, getDoc, doc, addDoc, setDoc } from '
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyBWRo09EIsgTaScFbtjRtbJ-awSX5ohAjk",
-    authDomain: "ldmtf-28bed.firebaseapp.com",
-    projectId: "ldmtf-28bed",
-    storageBucket: "ldmtf-28bed.appspot.com",
-    messagingSenderId: "683713139477",
-    appId: "1:683713139477:web:0d369c00298612bd0f8f1c",
-    measurementId: "G-DG4WLW9JJF"
-  };
+  apiKey: "AIzaSyBWRo09EIsgTaScFbtjRtbJ-awSX5ohAjk",
+  authDomain: "ldmtf-28bed.firebaseapp.com",
+  databaseURL: "https://ldmtf-28bed-default-rtdb.firebaseio.com",
+  projectId: "ldmtf-28bed",
+  storageBucket: "ldmtf-28bed.appspot.com",
+  messagingSenderId: "683713139477",
+  appId: "1:683713139477:web:0d369c00298612bd0f8f1c",
+  measurementId: "G-DG4WLW9JJF"
+};
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
+const db = getDatabase(app);
+const dbStore = getFirestore(app);
 const analytics = getAnalytics(app);
 
 //#region auth / Signin
@@ -61,8 +64,17 @@ const SigninEmailPassword = async () => {
       const signin = await signInWithEmailAndPassword(auth, SigninEmail, SigninPassword);
       showFormSection(signin);
       try {
-        const reportsCollection = collection(db, 'reports');
-        const snapshot = await getDocs(reportsCollection);
+        const userId = auth.currentUser.uid;
+        return onValue(ref(db, '/users/' + userId), (snapshot) => {
+        const username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
+        }, {
+          onlyOnce: true
+        });
+
+        const myOffersRef = query(ref(db, 'leCap/'), orderByChild('uid'), startAt(user.uid));
+        alert('xxx');
+        // const reportsCollection = collection(dbStore, 'reports');
+        // const snapshot = await getDocs(reportsCollection);
         //   snapshot.forEach(doc=>{
         //     alert(doc.get('comments'));
         //   });
@@ -85,8 +97,7 @@ const SigninEmailPassword = async () => {
         //   const docTest = await addDoc(reportsCollection, docData, auth.currentUser.uid);
       }
       catch (e) {
-        alert("Error adding document: " + e);
-        console.error("Error adding document: ", e);
+        alert("uh, error: " + e);
       }
   }
   catch (error) {
@@ -110,12 +121,12 @@ const createAccount = async () => {
       });
   }
   catch (error) {
-      alert(error);
+    showSigninError(error);
   }
 };
 const forgotPassword = async () => {
   try {
-    // const reportsCollection = collection(db, 'reports');
+    // const reportsCollection = collection(dbStore, 'reports');
     // const snapshot = await getDocs(reportsCollection);
     // const docData = {
     //     stringExample: "Hello world!",

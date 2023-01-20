@@ -33,7 +33,7 @@
 <script defer src="bundle.js"></script></head>
 <!-- https://getbootstrap.com/docs/4.0/utilities/spacing/ -->
 <!-- https://mdbootstrap.com/docs/standard/utilities/spacing/ -->
-<body style="font-family: raleway;">
+<body style="font-family: 'Raleway', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
     <section class="text-center" id="sectionSignin">
         <!-- Background image -->
         <div class="p-5 bg-image" style="background-image: url('https://mdbootstrap.com/img/new/textures/full/171.jpg'); height: 200px;"></div>
@@ -65,9 +65,15 @@
 
                         <!-- Email input -->
                         <div class="form-outline mb2" style="text-align: left">
-                            <input type="email" id="txtEmail" class="form-control"/>
-                            <label class="form-label" for="txtEmail">Email address</label>
-                            <label class="form-label" id="lblSigninErrorMsg" style="display: none; color: crimson; float: right;">Wrong userid or password. Try again.</label>
+                          <input type="email" id="txtEmail" class="form-control"/>
+                          <div class="row">
+                            <div class="col-md-4 mb-0">
+                              <label class="form-label" for="txtEmail">Email address</label>
+                            </div>
+                            <div class="col-md-8 mb-0" style="display: flex; justify-content: center; align-items: center;">
+                              <label id="lblSigninErrorMsg" style="display: none; color: crimson; font-family: 'Raleway', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; padding: 0px;"></label>
+                            </div>        
+                          </div>
                         </div>
 
                         <!-- Password input -->
