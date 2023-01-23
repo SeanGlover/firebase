@@ -1,4 +1,5 @@
 // import './styles.css';
+// https://softauthor.com/category/firebase/
 import {
     txtNameFirst,
     txtEmail,
@@ -15,13 +16,16 @@ import {
     showApp,
     btnSignout
 } from './ui';
+import {
+  square
+} from './classes';
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js
 import { getAnalytics } from 'firebase/analytics'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js
 import { getAuth, onAuthStateChanged, connectAuthEmulator, signInWithEmailAndPassword, updateProfile, createUserWithEmailAndPassword } from 'firebase/auth'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js
-import { getDatabase, ref, set, query, orderByChild, startAt, onValue} from "firebase/database";
-import { getFirestore, collection, getDocs, getDoc, doc, addDoc, setDoc } from 'firebase/firestore'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js
+import { getDatabase, ref, get, update, set, query, orderByChild, startAt, onValue, equalTo} from "firebase/database";
+import { getFirestore, collection, getDocs, getDoc, setDoc, addDoc } from 'firebase/firestore'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -42,7 +46,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getDatabase(app);
+const dbReal = getDatabase(app);
 const dbStore = getFirestore(app);
 const analytics = getAnalytics(app);
 
@@ -64,40 +68,36 @@ const SigninEmailPassword = async () => {
       const signin = await signInWithEmailAndPassword(auth, SigninEmail, SigninPassword);
       showFormSection(signin);
       try {
-        const userId = auth.currentUser.uid;
-        return onValue(ref(db, '/users/' + userId), (snapshot) => {
-        const username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
-        }, {
-          onlyOnce: true
-        });
+        // https://ldmtf-28bed-default-rtdb.firebaseio.com/
+        
+        // const dbRef = ref(getDatabase());
+        // set(dbRef, JSON.stringify(square));
+        
+        // writeUserData('b49f183c-860a-4366-b08b-82fbbcedd7c7', 'Edgar', 'Poe', 'poe@gmail.com', '514-123-1234', 'Role.client');
+        // writeUserData('898e8bb8-6aa4-4e56-a9f7-a8d674ced769', 'Frederick', 'Douglass', 'fred@gmail.com', '514-123-4567', 'Role.client');
+        
+        await getData();
+        alert('hi');
 
-        const myOffersRef = query(ref(db, 'leCap/'), orderByChild('uid'), startAt(user.uid));
-        alert('xxx');
-        // const reportsCollection = collection(dbStore, 'reports');
-        // const snapshot = await getDocs(reportsCollection);
-        //   snapshot.forEach(doc=>{
-        //     alert(doc.get('comments'));
-        //   });
-        //   const docData = {
-        //       stringExample: "Hello world!",
-        //       booleanExample: true,
-        //       numberExample: 3.14159265,
-        //       dateExample: new Date("December 10, 1815"),
-        //       arrayExample: [5, true, "hello"],
-        //       nullExample: null,
-        //       objectExample: {
-        //           a: 5,
-        //           b: {
-        //               nested: "foo"
-        //           }
-        //       }
-        //     };
-        //   alert(JSON.stringify(docData));
-        //   alert(reportsCollection.path);
-        //   const docTest = await addDoc(reportsCollection, docData, auth.currentUser.uid);
+        //#region set user or report data *** WORKS
+        var skipCode = true;
+        if(skipCode) {
+          const users = ref(dbReal, 'users/' + 'b49f183c-860a-4366-b08b-82fbbcedd7c7');
+          onValue(users, (snapshot) => {
+            const data = snapshot.val();
+            alert(data.toString());
+          });
+
+          const reports = ref(dbReal, 'reports/' + 'd91c6b02-65db-4eca-995d-5f0405237732');
+          onValue(reports, (snapshot) => {
+            const data = snapshot.val();
+            alert(data.toString());
+          });
+        }
+        //#endregion
       }
       catch (e) {
-        alert("uh, error: " + e);
+        alert("uh hi... error: " + e);
       }
   }
   catch (error) {
@@ -158,3 +158,28 @@ window.onload=function() {
   lnkForgotPwd.addEventListener('click', forgotPassword);
 }
 //#endregion
+function writeUserData(userId, nameFirst, nameLast, email, phoneNbr, role) {
+  set(ref(dbReal, 'users/' + userId), {
+    Id: userId,
+    FirstName: nameFirst,
+    LastName: nameLast,
+    Email: email,
+    Phone: phoneNbr,
+    Role : role
+  });
+}
+async function getData() {
+
+  const dbReports = ref(dbReal, "/reports");
+  const queryConstraints = [orderByChild("Id"), equalTo("d91c6b02-65db-4eca-995d-5f0405237732")];
+  const reportSnapshot = await get(query(dbReports));
+  alert(dbReports.key);
+  const report = await get(query(dbReports, ...queryConstraints));
+  
+  if (report.exists) {
+    alert("found by Id", report.val());
+  } else {
+    alert("not found by Id");
+  }
+
+}
