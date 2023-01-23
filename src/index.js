@@ -24,8 +24,8 @@ import {
 import { initializeApp } from 'firebase/app'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js
 import { getAnalytics } from 'firebase/analytics'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js
 import { getAuth, onAuthStateChanged, connectAuthEmulator, signInWithEmailAndPassword, updateProfile, createUserWithEmailAndPassword } from 'firebase/auth'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js
-import { getDatabase, ref, get, update, set, query, orderByChild, startAt, onValue, equalTo} from "firebase/database";
-import { getFirestore, collection, getDocs, getDoc, setDoc, addDoc } from 'firebase/firestore'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js
+import { getDatabase, ref, get, update, set, child, query, orderByChild, startAt, endAt, onValue, equalTo} from "firebase/database";
+import { getFirestore, collection, getDocs, getDoc, setDoc, addDoc, doc } from 'firebase/firestore'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -69,31 +69,50 @@ const SigninEmailPassword = async () => {
       showFormSection(signin);
       try {
         // https://ldmtf-28bed-default-rtdb.firebaseio.com/
+               
+        // const email = ref(dbReal, 'users/' + '898e8bb8-6aa4-4e56-a9f7-a8d674ced769' + '/Email');
+        // onValue(email, (snapshot) => {
+        //   const data = snapshot.val();
+        //   alert('hi');
+        // });
         
-        // const dbRef = ref(getDatabase());
-        // set(dbRef, JSON.stringify(square));
-        
-        // writeUserData('b49f183c-860a-4366-b08b-82fbbcedd7c7', 'Edgar', 'Poe', 'poe@gmail.com', '514-123-1234', 'Role.client');
-        // writeUserData('898e8bb8-6aa4-4e56-a9f7-a8d674ced769', 'Frederick', 'Douglass', 'fred@gmail.com', '514-123-4567', 'Role.client');
-        
-        await getData();
-        alert('hi');
+        const reports = collection(dbStore, "reports");
+        await setDoc(doc(reports, "owiIy4sh6msVPw56YPrK"), {
+          comments: "San Francisco", feedback: "CA", issues: "USA"
+        });
+
+        // get(child(dbReal, '/users/' + '898e8bb8-6aa4-4e56-a9f7-a8d674ced769')).then((snapshot) => {
+        //   alert('yes');
+        //   if (snapshot.exists) {
+        //     alert('yes');
+        //   } else {
+        //     console.log("No data available");
+        //     alert('no');
+        //   }
+        // }).catch((error) => {
+        //   alert(error);
+        // });
+        // alert('bye');
 
         //#region set user or report data *** WORKS
-        var skipCode = true;
-        if(skipCode) {
-          const users = ref(dbReal, 'users/' + 'b49f183c-860a-4366-b08b-82fbbcedd7c7');
-          onValue(users, (snapshot) => {
-            const data = snapshot.val();
-            alert(data.toString());
-          });
 
-          const reports = ref(dbReal, 'reports/' + 'd91c6b02-65db-4eca-995d-5f0405237732');
-          onValue(reports, (snapshot) => {
-            const data = snapshot.val();
-            alert(data.toString());
-          });
-        }
+        // writeUserData('b49f183c-860a-4366-b08b-82fbbcedd7c7', 'Edgar', 'Poe', 'poe@gmail.com', '514-123-1234', 'Role.client');
+        // writeUserData('898e8bb8-6aa4-4e56-a9f7-a8d674ced769', 'Frederick', 'Douglass', 'fred@gmail.com', '514-123-4567', 'Role.client');
+
+        // var skipCode = true;
+        // if(!skipCode) {
+        //   const users = ref(dbReal, 'users/' + 'b49f183c-860a-4366-b08b-82fbbcedd7c7');
+        //   onValue(users, (snapshot) => {
+        //     const data = snapshot.val();
+        //     alert(data.toString());
+        //   });
+
+        //   const reports = ref(dbReal, 'reports/' + 'd91c6b02-65db-4eca-995d-5f0405237732');
+        //   onValue(reports, (snapshot) => {
+        //     const data = snapshot.val();
+        //     alert(data.toString());
+        //   });
+        // }
         //#endregion
       }
       catch (e) {
@@ -169,6 +188,15 @@ function writeUserData(userId, nameFirst, nameLast, email, phoneNbr, role) {
   });
 }
 async function getData() {
+
+  try {
+    const dbRef = query(ref(dbReal, 'reports/id'), startAt('d91c6b02-65db-4eca-995d-5f0405237732'), endAt('d91c6b02-65db-4eca-995d-5f0405237732'));
+    const last = await get(dbRef);
+    alert(last);
+  }
+  catch(err) {
+      alert(err);
+  }
 
   const dbReports = ref(dbReal, "/reports");
   const queryConstraints = [orderByChild("Id"), equalTo("d91c6b02-65db-4eca-995d-5f0405237732")];
