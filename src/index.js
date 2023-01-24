@@ -24,8 +24,8 @@ import {
 import { initializeApp } from 'firebase/app'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js
 import { getAnalytics } from 'firebase/analytics'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-analytics.js
 import { getAuth, onAuthStateChanged, connectAuthEmulator, signInWithEmailAndPassword, updateProfile, createUserWithEmailAndPassword } from 'firebase/auth'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js
-import { getDatabase, ref, get, update, set, child, query, orderByChild, startAt, endAt, onValue, equalTo} from "firebase/database";
-import { getFirestore, collection, getDocs, getDoc, setDoc, addDoc, doc } from 'firebase/firestore'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js
+import { getDatabase, ref, get, update, set, child, query, orderByChild, startAt, endAt, onValue, equalTo, connectDatabaseEmulator} from "firebase/database";
+import { getFirestore, collection, getDocs, getDoc, setDoc, addDoc, doc, connectFirestoreEmulator } from 'firebase/firestore'; // https://www.gstatic.com/firebasejs/9.0.0/firebase-firestore.js
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -50,8 +50,19 @@ const dbReal = getDatabase(app);
 const dbStore = getFirestore(app);
 const analytics = getAnalytics(app);
 
+// const { initializeAppCheck, ReCaptchaEnterpriseProvider } = require("firebase/app-check");
+// const appCheck = initializeAppCheck(app, {
+//   provider: new ReCaptchaEnterpriseProvider('6Lf-NfUjAAAAAJFMraCWPxm_GNa34kEn9TBnxSCY'),
+//   // Optional argument. If true, the SDK automatically refreshes App Check
+//   // tokens as needed.
+//   isTokenAutoRefreshEnabled: true
+// });
+
 //#region auth / Signin
 connectAuthEmulator(auth, 'http://localhost:9099');
+connectFirestoreEmulator(dbStore, 'http://localhost:8080');
+connectDatabaseEmulator(dbReal, 'http://localhost:9000');
+
 onAuthStateChanged(auth, user => {
     if(user!=null) {
         console.log('logged in!');
@@ -75,14 +86,24 @@ const SigninEmailPassword = async () => {
         //   const data = snapshot.val();
         //   alert('hi');
         // });
-        
-        const reports = collection(dbStore, "reports");
-        await setDoc(doc(reports, "owiIy4sh6msVPw56YPrK"), {
-          comments: "San Francisco", feedback: "CA", issues: "USA"
-        });
 
-        // get(child(dbReal, '/users/' + '898e8bb8-6aa4-4e56-a9f7-a8d674ced769')).then((snapshot) => {
-        //   alert('yes');
+        const reports = collection(dbStore, "reports");
+        const newCityRef = doc(collection(dbStore, "cities"));
+        const docRef = addDoc(collection(dbStore, "cities"), {
+          name: "Berlin",
+          country: "Germany"
+        });
+        console.log("Document written with ID: ", docRef.id);
+        // await setDoc(doc(reports, "/owiIy4sh6msVPw56YPrK"), {
+        //   comments: "San Francisco", feedback: "CA", issues: "USA"
+        // });
+        // var firebaseHeadingRef = dbReal.ref().child("Heading");
+
+        // firebaseHeadingRef.on('value', function(datasnapshot) {
+        //     heading.innerText = datasnapshot.val();
+        // });
+
+        // get(child(ref(dbReal, '/users/' + '898e8bb8-6aa4-4e56-a9f7-a8d674ced769'))).then((snapshot) => {
         //   if (snapshot.exists) {
         //     alert('yes');
         //   } else {
@@ -95,24 +116,27 @@ const SigninEmailPassword = async () => {
         // alert('bye');
 
         //#region set user or report data *** WORKS
-
+        // let uuid = self.crypto.randomUUID();
         // writeUserData('b49f183c-860a-4366-b08b-82fbbcedd7c7', 'Edgar', 'Poe', 'poe@gmail.com', '514-123-1234', 'Role.client');
         // writeUserData('898e8bb8-6aa4-4e56-a9f7-a8d674ced769', 'Frederick', 'Douglass', 'fred@gmail.com', '514-123-4567', 'Role.client');
+        // writeUserData(uuid, 'Monkey', 'Bananas', 'mkyBananas@gmail.com', '514-123-4567', 'Role.admin');
+        // alert(uuid);
 
-        // var skipCode = true;
-        // if(!skipCode) {
-        //   const users = ref(dbReal, 'users/' + 'b49f183c-860a-4366-b08b-82fbbcedd7c7');
-        //   onValue(users, (snapshot) => {
-        //     const data = snapshot.val();
-        //     alert(data.toString());
-        //   });
+        var skipCode = true;
+        if(!skipCode) {
+          alert('not skipping');
+          const users = ref(dbReal, 'users/' + 'b49f183c-860a-4366-b08b-82fbbcedd7c7');
+          onValue(users, (snapshot) => {
+            const data = snapshot.val();
+            alert(data.toString());
+          });
 
-        //   const reports = ref(dbReal, 'reports/' + 'd91c6b02-65db-4eca-995d-5f0405237732');
-        //   onValue(reports, (snapshot) => {
-        //     const data = snapshot.val();
-        //     alert(data.toString());
-        //   });
-        // }
+          const reports = ref(dbReal, 'reports/' + 'd91c6b02-65db-4eca-995d-5f0405237732');
+          onValue(reports, (snapshot) => {
+            const data = snapshot.val();
+            alert(data.toString());
+          });
+        }
         //#endregion
       }
       catch (e) {
