@@ -1,4 +1,3 @@
-// in a terminal: Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const config = {
